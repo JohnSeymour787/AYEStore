@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="AYEStore-js-1.0">
-    <output-path>C:\Users\John\IdeaProjects\AYEStore\build\libs</output-path>
-    <root id="archive" name="AYEStore-js-1.0.jar">
-      <element id="module-output" name="AYEStore.jsMain" />
-    </root>
-  </artifact>
-</component>
