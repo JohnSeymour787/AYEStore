@@ -1,5 +1,11 @@
 import kotlinx.browser.document
+import react.dom.render
+import react.child
 
-fun main() {
-    document.getElementById("root")?.innerHTML = "Hello, Kotlin/JS!"
+fun main()
+{
+    render(document.getElementById("root"))
+    {
+        child(App)
+    }
 }
