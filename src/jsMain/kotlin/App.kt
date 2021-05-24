@@ -4,53 +4,85 @@ import react.*
 import react.dom.*
 import kotlinext.js.*
 import kotlinx.html.js.*
+import org.w3c.dom.events.Event
+import react.router.dom.*
+import react.router.dom.navLink
 
 private val scope = MainScope()
 
-val App = functionalComponent<RProps>
-{ _ ->
-    val (userList, setUserList) = useState(emptyList<Customer>())
+external interface AppProps: RProps
+{
+    var storeState: String
+}
 
-    useEffect(dependencies = listOf())
-    {
-        scope.launch()
+
+val App = functionalComponent<AppProps>
+{ props ->
+
+        val (userList, setUserList) = useState(emptyList<Customer>())
+        val (storeState, setStoreState) = useState(props.storeState)
+
+
+
+/*        useEffect(dependencies = listOf())
         {
-            println("Getting user list")
-            setUserList(getUserList())
-        }
-    }
-
-    h1()
-    {
-        + "This is my H1"
-    }
-
-    ul()
-    {
-        println("User list size ${userList.size}")
-        userList.sortedByDescending(Customer::firstName).forEach()
-        { user ->
-            li()
+            scope.launch()
             {
-                key = user.toString()
-                + "[${user.firstName}] ${user.lastName}"
+              //  setUserList(getUserList())
             }
-        }
-    }
+        }*/
 
-    child(
-        InputComponent,
-        props = jsObject()
+
+        h1()
         {
-            onSubmit =
-            { input ->
-                val user = Customer(input.replace("!", ""), "lastname", 4, "test1", "test2", "test3", "test4")
-                scope.launch()
-                {
-                    addUser(user)
-                    setUserList(getUserList())
-                }
+            + "Welcome to All Your Electronics"
+        }
+
+
+        div()
+        {
+            a(href = "/signup")
+            {
+                +"Register"
+            }
+
+            br { }
+
+            a(href = "/browse")
+            {
+                +"Browse Catalogue"
+            }
+
+            br { }
+
+            a(href = "/manageProducts")
+            {
+                +"Manage Products"
             }
         }
-    )
+
+
+
+/*        browserRouter()
+        {
+            switch()
+            {
+                route("/", Home::class, exact = true)
+
+                route("/signup", SignUp::class)
+            }
+        }*/
+
+
+/*        ul()
+        {
+           userList.sortedByDescending(Customer::firstName).forEach()
+            { user ->
+                li()
+                {
+                    key = user.toString()
+                    + "[${user.firstName}] ${user.lastName}"
+                }
+            }*//*
+        }*/
 }

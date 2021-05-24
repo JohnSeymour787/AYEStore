@@ -1,11 +1,29 @@
 import kotlinx.browser.document
 import react.dom.render
 import react.child
+import react.useState
 
 fun main()
 {
-    render(document.getElementById("root"))
+    document.bgColor = "8BC34A"
+
+    document.getElementById("root")?.let()
     {
-        child(App)
+        render(it)
+        {
+            child(App)
+            {
+                attrs.storeState = "home"
+            }
+        }
+    }
+
+
+    document.getElementById("signup")?.let()
+    {
+        render(it)
+        {
+            child(SignUp::class) { }
+        }
     }
 }

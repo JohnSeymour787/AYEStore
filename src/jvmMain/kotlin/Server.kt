@@ -13,8 +13,6 @@ import org.litote.kmongo.coroutine.*
 import org.litote.kmongo.reactivestreams.KMongo
 import com.mongodb.ConnectionString
 
-
-
 fun main()
 {
     //Server and DB setup
@@ -54,6 +52,11 @@ fun main()
                 call.respondText(this::class.java.classLoader.getResource("index.html")!!.readText(), ContentType.Text.Html)
             }
 
+            get("/signup")
+            {
+                call.respondText(this::class.java.classLoader.getResource("signup.html")!!.readText(), ContentType.Text.Html)
+            }
+
             route("/register")
             {
                 get()
@@ -62,7 +65,11 @@ fun main()
                 }
                 post()
                 {
-                    userCollection.insertOne(call.receive<Customer>())
+                    val received = call.receive<Customer>()
+
+                //    if (userCollection.)
+
+                    userCollection.insertOne(received)
                     call.respond(HttpStatusCode.OK)
                 }
             }
