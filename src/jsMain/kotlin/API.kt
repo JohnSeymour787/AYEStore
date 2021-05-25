@@ -17,9 +17,9 @@ suspend fun getUserList(): List<Customer>
     return jsonClient.get(endpoint + User.path)
 }
 
-suspend fun addUser(toAdd: User)
+suspend fun addUser(toAdd: User): String
 {
-    jsonClient.post<Unit>(endpoint + User.path)
+    return jsonClient.post(endpoint + User.path)
     {
         contentType(ContentType.Application.Json)
         body = toAdd

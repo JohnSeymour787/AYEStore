@@ -1,5 +1,6 @@
 import kotlinext.js.jsObject
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import react.*
 import react.dom.*
@@ -27,7 +28,7 @@ class SignUp: RComponent<RProps, RState>()
                     //val user = Customer(input.replace("!", ""), "lastname", 4, "test1", "test2", "test3", "test4")
                     scope.launch()
                     {
-                        addUser(customer)
+                         addUser(customer)
                         //setUserList(getUserList())
                     }
                 }

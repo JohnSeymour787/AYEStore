@@ -1,3 +1,5 @@
+import kotlinx.browser.document
+import kotlinx.dom.clear
 import kotlinx.html.*
 import kotlinx.html.js.onChangeFunction
 import kotlinx.html.js.onSubmitFunction
@@ -11,6 +13,44 @@ import react.useState
 external interface InputProps: RProps
 {
     var onSubmit: (Customer) -> Unit
+}
+
+private fun validateFields(firstName: String, lastName: String, age: Int, address: String, phone: String, email: String, password: String) : List<String>
+{
+    val errorMessages = mutableListOf<String>()
+
+    if (firstName.isEmpty())
+    {
+        errorMessages.add("First name cannot be empty")
+    }
+
+    if (lastName.isEmpty())
+    {
+        errorMessages.add("Last name cannot be empty")
+    }
+
+    if (age < 1)
+    {
+        errorMessages.add("Must be older than 1")
+    }
+
+    if (address.isEmpty())
+    {
+        errorMessages.add("Address cannot be empty")
+    }
+
+    if (phone.isEmpty())
+    {
+        errorMessages.add("Phone cannot be empty")
+    }
+
+    if (email.isEmpty())
+    {
+        errorMessages.add("Email cannot be empty")
+    }
+
+
+    return errorMessages
 }
 
 val InputComponent = functionalComponent<InputProps>
@@ -27,16 +67,45 @@ val InputComponent = functionalComponent<InputProps>
     val submitHandler: (Event) -> Unit =
     {
         it.preventDefault()
-        props.onSubmit(Customer(firstName, lastName, age, address, phone, email, password))
+        val errors = validateFields(firstName, lastName, age, address, phone, email, password)
 
-        setFirstName("")
-        setLastName("")
-        setAge(0)
-        setAddress("")
-        setPhone("")
-        setEmail("")
-        setPassword("")
+        if (errors.isNotEmpty())
+        {
+            document.getElementById("messageDiv")?.let()
+            { div ->
+                render(div)
+                {
+                    ul()
+                    {
+                        errors.forEach()
+                        { err ->
+                            key = err
+                            li()
+                            {
+                                +err
+                            }
+                            br { }
+                        }
+                    }
+                }
+            }
+        }
+        //If no validation errors
+        else
+        {
+            props.onSubmit(Customer(firstName, lastName, age, address, phone, email, password))
 
+            //TODO() If successful display message
+     //       document.getElementById("messageDiv")?.let()
+
+            setFirstName("")
+            setLastName("")
+            setAge(0)
+            setAddress("")
+            setPhone("")
+            setEmail("")
+            setPassword("")
+        }
     }
 
 
@@ -182,5 +251,10 @@ val InputComponent = functionalComponent<InputProps>
         {
             +"Create Account"
         }
+    }
+
+    div()
+    {
+        attrs.id = "messageDiv"
     }
 }

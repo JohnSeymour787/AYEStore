@@ -66,11 +66,10 @@ fun main()
                 post()
                 {
                     val received = call.receive<Customer>()
-
-                //    if (userCollection.)
-
-                    userCollection.insertOne(received)
-                    call.respond(HttpStatusCode.OK)
+                    //TODO() Checking if email does not already exist
+                    //    if (userCollection.)
+                    call.userCollection.insertOne(received)
+                    call.respond("Cake")
                 }
             }
 
