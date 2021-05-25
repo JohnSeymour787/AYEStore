@@ -1,6 +1,5 @@
 import kotlinext.js.jsObject
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import react.*
 import react.dom.*
@@ -19,7 +18,7 @@ class SignUp: RComponent<RProps, RState>()
         }
 
         child(
-            InputComponent,
+            RegisterInput,
             props = jsObject()
             {
                 onSubmit =

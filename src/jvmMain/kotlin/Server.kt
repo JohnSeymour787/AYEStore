@@ -13,6 +13,7 @@ import org.litote.kmongo.coroutine.*
 import org.litote.kmongo.reactivestreams.KMongo
 import com.mongodb.ConnectionString
 
+
 fun main()
 {
     //Server and DB setup
@@ -25,7 +26,7 @@ fun main()
     val client = if (connectionString != null) KMongo.createClient(connectionString).coroutine else KMongo.createClient().coroutine
     val database = client.getDatabase(connectionString?.database ?: "AllYourElectronics")
     val userCollection = database.getCollection<Customer>("Users")
-    val userCollection = database.getCollection<List<Product>>("Catalogue")
+    val catalogCollection = database.getCollection<Product>("Catalogue")
 
     //Run server
     embeddedServer(Netty, port)
@@ -58,6 +59,16 @@ fun main()
                 call.respondText(this::class.java.classLoader.getResource("signup.html")!!.readText(), ContentType.Text.Html)
             }
 
+            get("/browseCatalogue")
+            {
+                call.respondText(this::class.java.classLoader.getResource("browseCatalogue.html")!!.readText(), ContentType.Text.Html)
+            }
+
+            get("/manageProducts")
+            {
+                call.respondText(this::class.java.classLoader.getResource("manageProducts.html")!!.readText(), ContentType.Text.Html)
+            }
+
             route("/register")
             {
                 get()
@@ -69,8 +80,34 @@ fun main()
                     val received = call.receive<Customer>()
                     //TODO() Checking if email does not already exist
                     //    if (userCollection.)
-                    call.userCollection.insertOne(received)
+                    userCollection.insertOne(received)
                     call.respond("Cake")
+                }
+            }
+
+            route(Catalogue.path)
+            {
+                get()
+                {
+                    call.respond(catalogCollection.find().toList())
+                }
+                post()
+                {
+                    val received = call.receive<Product>()
+
+                    catalogCollection.findOne("{ID: ${received.ID}}")?.let()
+                    {
+/*                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::name, received.name))
+                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::stockQuantity, received.stockQuantity))
+                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::price, received.price))
+                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::description, received.description))
+                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::manufacturer, received.manufacturer))
+     */                   call.respond("Inserted new catalogue")
+                    }?: run()
+                    {
+                        catalogCollection.insertOne(received)
+                        call.respond("Inserted new catalogue")
+                    }
                 }
             }
 

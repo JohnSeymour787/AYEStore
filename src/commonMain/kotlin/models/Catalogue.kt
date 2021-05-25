@@ -1,4 +1,3 @@
-package models
 
 class Catalogue(productTemp: Set<Product> = setOf(),
                 var catalogueName: String,
@@ -15,4 +14,9 @@ class Catalogue(productTemp: Set<Product> = setOf(),
     }
 
     fun getProduct(ID: Int): Product? = productList[ID]
+
+    companion object
+    {
+        const val path = "/catalogue"
+    }
 }

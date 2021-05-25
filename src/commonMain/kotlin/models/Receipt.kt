@@ -1,4 +1,3 @@
-package models
 
 import io.ktor.util.date.*
 

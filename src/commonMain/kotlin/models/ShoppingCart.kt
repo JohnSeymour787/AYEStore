@@ -1,4 +1,3 @@
-package models
 
 class ShoppingCart(val shoppingList: MutableList<CartItem> = mutableListOf())
 {

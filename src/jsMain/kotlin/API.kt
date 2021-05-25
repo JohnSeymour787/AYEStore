@@ -17,9 +17,23 @@ suspend fun getUserList(): List<Customer>
     return jsonClient.get(endpoint + User.path)
 }
 
+suspend fun getProductList(): List<Product>
+{
+    return jsonClient.get(endpoint + Catalogue.path)
+}
+
 suspend fun addUser(toAdd: User): String
 {
     return jsonClient.post(endpoint + User.path)
+    {
+        contentType(ContentType.Application.Json)
+        body = toAdd
+    }
+}
+
+suspend fun addProduct(toAdd: Product): String
+{
+    return jsonClient.post(endpoint + Catalogue.path)
     {
         contentType(ContentType.Application.Json)
         body = toAdd

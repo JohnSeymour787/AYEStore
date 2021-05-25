@@ -18,12 +18,27 @@ fun main()
         }
     }
 
-
     document.getElementById("signup")?.let()
     {
         render(it)
         {
             child(SignUp::class) { }
+        }
+    }
+
+    document.getElementById("browseCatalogue")?.let()
+    {
+        render(it)
+        {
+            child(SignUp::class) { }
+        }
+    }
+
+    document.getElementById("manageProducts")?.let()
+    {
+        render(it)
+        {
+            child(ManageProducts) { }
         }
     }
 }

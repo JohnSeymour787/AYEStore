@@ -48,7 +48,7 @@ val App = functionalComponent<AppProps>
 
             br { }
 
-            a(href = "/browse")
+            a(href = "/browseCatalogue")
             {
                 +"Browse Catalogue"
             }

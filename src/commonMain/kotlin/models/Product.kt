@@ -1,5 +1,6 @@
-package models
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Product(var ID: Int,
               var stockQuantity: Int = 0,
               var name: String,
