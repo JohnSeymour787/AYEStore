@@ -25,6 +25,7 @@ fun main()
     val client = if (connectionString != null) KMongo.createClient(connectionString).coroutine else KMongo.createClient().coroutine
     val database = client.getDatabase(connectionString?.database ?: "AllYourElectronics")
     val userCollection = database.getCollection<Customer>("Users")
+    val userCollection = database.getCollection<List<Product>>("Catalogue")
 
     //Run server
     embeddedServer(Netty, port)
