@@ -1,12 +1,13 @@
-
-
 class CartItem(val product: Product)
 {
     var quantitiy = 0
+        private set
 
     val productID = product.ID
 
-    val price = quantitiy * product.price
+    var price = 0F
+        get() = quantitiy * product.price
+        private set
 
     fun setQuantity(newAmount: Int): Boolean
     {

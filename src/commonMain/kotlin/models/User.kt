@@ -13,7 +13,7 @@ sealed class User
 
     companion object
     {
-        const val path = "/register"
+        const val PATH = "/register"
     }
 }
 
@@ -26,4 +26,14 @@ class Customer(override val firstName: String,
                override val email: String,
                override val password: String) : User()
 {
+    private val preferredPayment: MutableList<PaymentMethod> = mutableListOf()
+
+    fun addPayment(toAdd: PaymentMethod)
+    {
+        preferredPayment.add(toAdd)
+    }
+
+    var paymentMethods: List<PaymentMethod> = preferredPayment
+        get() = preferredPayment
+        private set
 }

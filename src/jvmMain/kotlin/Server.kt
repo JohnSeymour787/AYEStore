@@ -85,7 +85,7 @@ fun main()
                 }
             }
 
-            route(Catalogue.path)
+            route(Catalogue.PATH)
             {
                 get()
                 {
@@ -95,14 +95,15 @@ fun main()
                 {
                     val received = call.receive<Product>()
 
-                    catalogCollection.findOne("{ID: ${received.ID}}")?.let()
+                    catalogCollection.findOne("{ID:'${received.ID}'}")?.let()
                     {
-/*                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::name, received.name))
-                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::stockQuantity, received.stockQuantity))
-                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::price, received.price))
-                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::description, received.description))
-                        catalogCollection.updateOne("{ID: ${received.ID}}", set(::manufacturer, received.manufacturer))
-     */                   call.respond("Inserted new catalogue")
+                        catalogCollection.updateOne("{ID:'${received.ID}'}", setValue(Product::name, received.name))
+                        catalogCollection.updateOne("{ID:'${received.ID}'}", setValue(Product::manufacturer, received.manufacturer))
+                        catalogCollection.updateOne("{ID:'${received.ID}'}", setValue(Product::stockQuantity, received.stockQuantity))
+                        catalogCollection.updateOne("{ID:'${received.ID}'}", setValue(Product::price, received.price))
+                        catalogCollection.updateOne("{ID:'${received.ID}'}", setValue(Product::description, received.description))
+
+                        call.respond("Updated new catalogue")
                     }?: run()
                     {
                         catalogCollection.insertOne(received)

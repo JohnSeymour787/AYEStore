@@ -6,7 +6,6 @@ import react.dom.*
 
 private val scope = MainScope()
 
-
 @JsExport
 class SignUp: RComponent<RProps, RState>()
 {
@@ -23,12 +22,9 @@ class SignUp: RComponent<RProps, RState>()
             {
                 onSubmit =
                 { customer ->
-                    println(customer.toString())
-                    //val user = Customer(input.replace("!", ""), "lastname", 4, "test1", "test2", "test3", "test4")
                     scope.launch()
                     {
-                         addUser(customer)
-                        //setUserList(getUserList())
+                        API.addUser(customer)
                     }
                 }
             }

@@ -1,7 +1,6 @@
-
 object PaymentProcessor
 {
-    fun processPayment(shoppingCart: ShoppingCart, paymentMethod: PaymentMethod): Boolean
+    fun processPayment(shoppingCart: ShoppingCart, paymentMethod: PaymentMethod): Receipt?
     {
         TODO()
     }

@@ -8,5 +8,7 @@ data class Product(var ID: Int,
               var description: String,
               var manufacturer: String)
 {
-    val inStock = stockQuantity > 0
+    var inStock = stockQuantity > 0
+        get() = stockQuantity > 0
+        private set
 }

@@ -5,37 +5,40 @@ import io.ktor.client.request.*
 import kotlinx.browser.window
 import io.ktor.http.*
 
-val endpoint = window.location.origin
-
-val jsonClient = HttpClient()
+object API
 {
-    install(JsonFeature) { serializer = KotlinxSerializer() }
-}
+    private val endpoint = window.location.origin
 
-suspend fun getUserList(): List<Customer>
-{
-    return jsonClient.get(endpoint + User.path)
-}
-
-suspend fun getProductList(): List<Product>
-{
-    return jsonClient.get(endpoint + Catalogue.path)
-}
-
-suspend fun addUser(toAdd: User): String
-{
-    return jsonClient.post(endpoint + User.path)
+    private val jsonClient = HttpClient()
     {
-        contentType(ContentType.Application.Json)
-        body = toAdd
+        install(JsonFeature) { serializer = KotlinxSerializer() }
     }
-}
 
-suspend fun addProduct(toAdd: Product): String
-{
-    return jsonClient.post(endpoint + Catalogue.path)
+    suspend fun getUserList(): List<Customer>
     {
-        contentType(ContentType.Application.Json)
-        body = toAdd
+        return jsonClient.get(endpoint + User.PATH)
+    }
+
+    suspend fun getProductList(): List<Product>
+    {
+        return jsonClient.get(endpoint + Catalogue.PATH)
+    }
+
+    suspend fun addUser(toAdd: User): String
+    {
+        return jsonClient.post(endpoint + User.PATH)
+        {
+            contentType(ContentType.Application.Json)
+            body = toAdd
+        }
+    }
+
+    suspend fun addProduct(toAdd: Product): String
+    {
+        return jsonClient.post(endpoint + Catalogue.PATH)
+        {
+            contentType(ContentType.Application.Json)
+            body = toAdd
+        }
     }
 }

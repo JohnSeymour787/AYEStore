@@ -1,14 +1,5 @@
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import react.*
 import react.dom.*
-import kotlinext.js.*
-import kotlinx.html.js.*
-import org.w3c.dom.events.Event
-import react.router.dom.*
-import react.router.dom.navLink
-
-private val scope = MainScope()
 
 external interface AppProps: RProps
 {
@@ -19,70 +10,31 @@ external interface AppProps: RProps
 val App = functionalComponent<AppProps>
 { props ->
 
-        val (userList, setUserList) = useState(emptyList<Customer>())
-        val (storeState, setStoreState) = useState(props.storeState)
+    h1()
+    {
+        + "Welcome to All Your Electronics"
+    }
 
 
-
-/*        useEffect(dependencies = listOf())
+    div()
+    {
+        a(href = "/signup")
         {
-            scope.launch()
-            {
-              //  setUserList(getUserList())
-            }
-        }*/
-
-
-        h1()
-        {
-            + "Welcome to All Your Electronics"
+            +"Register"
         }
 
+        br { }
 
-        div()
+        a(href = "/browseCatalogue")
         {
-            a(href = "/signup")
-            {
-                +"Register"
-            }
-
-            br { }
-
-            a(href = "/browseCatalogue")
-            {
-                +"Browse Catalogue"
-            }
-
-            br { }
-
-            a(href = "/manageProducts")
-            {
-                +"Manage Products"
-            }
+            +"Browse Catalogue"
         }
 
+        br { }
 
-
-/*        browserRouter()
+        a(href = "/manageProducts")
         {
-            switch()
-            {
-                route("/", Home::class, exact = true)
-
-                route("/signup", SignUp::class)
-            }
-        }*/
-
-
-/*        ul()
-        {
-           userList.sortedByDescending(Customer::firstName).forEach()
-            { user ->
-                li()
-                {
-                    key = user.toString()
-                    + "[${user.firstName}] ${user.lastName}"
-                }
-            }*//*
-        }*/
+            +"Manage Products"
+        }
+    }
 }

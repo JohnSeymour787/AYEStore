@@ -1,9 +1,8 @@
-
 class Catalogue(productTemp: Set<Product> = setOf(),
                 var catalogueName: String,
                 var catalogueDescription: String)
 {
-    val productList: MutableMap<Int, Product> = mutableMapOf()
+    private val productList: MutableMap<Int, Product> = mutableMapOf()
 
     init
     {
@@ -17,6 +16,6 @@ class Catalogue(productTemp: Set<Product> = setOf(),
 
     companion object
     {
-        const val path = "/catalogue"
+        const val PATH = "/catalogue"
     }
 }

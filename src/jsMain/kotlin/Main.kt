@@ -1,7 +1,6 @@
 import kotlinx.browser.document
 import react.dom.render
 import react.child
-import react.useState
 
 fun main()
 {

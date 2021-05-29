@@ -14,7 +14,7 @@ external interface InputProps: RProps
     var onSubmit: (Customer) -> Unit
 }
 
-private fun validateFields(firstName: String, lastName: String, age: Int, address: String, phone: String, email: String, password: String) : List<String>
+private fun validateFields(firstName: String, lastName: String, age: Int, address: String, phone: String, email: String, password: String): List<String>
 {
     val errorMessages = mutableListOf<String>()
 
@@ -48,6 +48,10 @@ private fun validateFields(firstName: String, lastName: String, age: Int, addres
         errorMessages.add("Email cannot be empty")
     }
 
+    if (password.isEmpty())
+    {
+        errorMessages.add("Password cannot be empty")
+    }
 
     return errorMessages
 }
@@ -93,9 +97,6 @@ val RegisterInput = functionalComponent<InputProps>
         else
         {
             props.onSubmit(Customer(firstName, lastName, age, address, phone, email, password))
-
-            //TODO() If successful display message
-     //       document.getElementById("messageDiv")?.let()
 
             setFirstName("")
             setLastName("")
